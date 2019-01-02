@@ -3,12 +3,18 @@ package com.hmily.dubbo.snowFlakeDemo.service.impl;
 import com.hmily.dubbo.snowFlakeDemo.exception.SnowFlakeCustomException;
 import com.hmily.dubbo.snowFlakeDemo.service.ISnowFlakeService;
 import com.hmily.dubbo.snowFlakeDemo.util.SnowFlake;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SnowFlakeServiceImpl implements ISnowFlakeService {
 
+    private final  static Logger log = LoggerFactory.getLogger(SnowFlakeServiceImpl.class);
+
 	@Override
 	public long getSnowFlakeID() {
-		return SnowFlake.getId();
+        long id = SnowFlake.getId();
+        log.info("id: {}", id);
+        return id;
 	}
 
 	@Override
@@ -18,7 +24,9 @@ public class SnowFlakeServiceImpl implements ISnowFlakeService {
 		}
 		long[] ids = new long[size];
 		for (int i = 0; i < size; i++) {
-			ids[i] = SnowFlake.getId();
+            long id = SnowFlake.getId();
+			ids[i] = id;
+            log.info("id: {}", id);
 		}
 		return ids;
 	}
